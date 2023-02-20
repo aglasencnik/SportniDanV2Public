@@ -1,0 +1,55 @@
+﻿@inherits IndexBase
+@page "/"
+@inject IConfiguration configuration
+
+<PageTitle>Športni Dan 2022 Oktober</PageTitle>
+
+<div class="">
+    @if (appData != null)
+    {
+        @((MarkupString)appData.Value)
+    }
+    else
+    {
+        @((MarkupString)configuration["DefaultHomePage"])
+    }
+</div>
+
+<div class="mt-5" style="overflow-x:auto;">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col" colspan="@numOfExercises">Doseženo mesto v posamezni nalogi (št. naloge)</th>
+            </tr>
+            <tr>
+                <th scope="col">Mesto</th>
+                <th scope="col">Število točk</th>
+                <th scope="col">Razred</th>
+                @for (var i = 1; i <= numOfExercises; i++)
+                {
+                    <th scope="col">@i</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @if (gameScores != null)
+            {
+                @foreach (var gameScore in gameScores)
+                {
+                    <tr>
+                        <td>@gameScore.Place</td>
+                        <td>@gameScore.Points</td>
+                        <td>@gameScore.ClassName</td>
+                        @foreach (int exercisePlace in gameScore.ExercisePlaces)
+                        {
+                            <td>@(exercisePlace != 0 ? $"{exercisePlace}" : "-")</td>
+                        }
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

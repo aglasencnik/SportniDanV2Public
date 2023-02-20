@@ -1,0 +1,63 @@
+﻿@inherits EditUserBase
+
+<div class="modal-class">
+    <EditForm Model="inputModel" OnValidSubmit="@FormSubmit" Context="EditForm">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="form-group">
+            <label class="input-label">ID Uporabnika:</label>
+            <div class="mt-2">
+                <InputNumber @bind-Value="inputModel.Id" class="form-control input-border" disabled="true"></InputNumber>
+            </div>
+        </div>
+        <div class="form-group mt-4">
+            <label class="input-label">Uporabniško ime:</label>
+            <div class="mt-2">
+                <InputText @bind-Value="inputModel.Username" class="form-control input-border" disabled="@((EditType == Enums.EditType.Delete) ? true : false)"></InputText>
+            </div>
+        </div>
+        <div class="form-group mt-4">
+            <label class="input-label">Geslo:</label>
+            <div class="mt-2">
+                <InputText @bind-Value="inputModel.Password" class="form-control input-border" disabled="@((EditType == Enums.EditType.Delete) ? true : false)"></InputText>
+            </div>
+        </div>
+        <div class="form-group mt-4">
+            <label class="input-label">Tip uporabnika:</label>
+            <div class="mt-2">
+                <InputSelect @bind-Value="inputModel.UserType" class="form-select input-border" disabled="@((EditType == Enums.EditType.Delete) ? true : false)">
+                    @foreach (var item in Enum.GetValues(typeof(UserType)))
+                    {
+                        <option value="@item">@item</option>
+                    }
+                </InputSelect>
+            </div>
+        </div>
+        <div class="form-group mt-4">
+            <label class="input-label">Dostopne naloge:</label>
+            <div class="mt-2">
+                <select @ref="_selectReference" @onchange="OnExerciseSelectionChanged" multiple class="form-select" disabled="@((EditType == Enums.EditType.Delete) ? true : false)">
+                    @if (Exercises != null && inputModel != null)
+                    {
+                        foreach (var item in Exercises)
+                        {
+                            if (inputModel.UserExercises != null && PreSelectedIds.Contains(item.Id))
+                            {
+                                <option value="@item.Id" selected="true">@(item.ExerciseNumber). Naloga</option>
+                            }
+                            else
+                            {
+                                <option value="@item.Id">@(item.ExerciseNumber). Naloga</option>
+                            }
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="mt-4">
+            <button type="submit" class="btn btn-primary">Shrani</button>
+        </div>
+        <p class="text-danger error-message mt-4">@errorMessage</p>
+    </EditForm>
+</div>

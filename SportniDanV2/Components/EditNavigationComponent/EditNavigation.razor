@@ -1,0 +1,48 @@
+﻿@inherits EditNavigationBase
+
+<div class="d-flex justify-content-center flex-wrap">
+    @if(CurrentPage == EditPageType.HomePage)
+    {
+        <NavLink class="btn btn-primary my-2 my-sm-0 mx-3 disabled" href="/edit/homepage">Domača stran</NavLink>
+    }
+    else
+    {
+        <NavLink class="btn btn-primary my-2 my-sm-0 mx-3" href="/edit/homepage">Domača stran</NavLink>
+    }
+
+    @if(CurrentPage == EditPageType.Class)
+    {
+        <NavLink class="btn btn-primary my-2 my-sm-0 mx-3 disabled" href="/edit/class">Razredi</NavLink>
+    }
+    else
+    {
+        <NavLink class="btn btn-primary my-2 my-sm-0 mx-3" href="/edit/class">Razredi</NavLink>
+    }
+
+    @if(CurrentPage == EditPageType.User)
+    {
+        <NavLink class="btn btn-primary my-2 my-sm-0 mx-3 disabled" href="/edit/user">Uporabniki</NavLink>
+    }
+    else
+    {
+        <NavLink class="btn btn-primary my-2 my-sm-0 mx-3" href="/edit/user">Uporabniki</NavLink>
+    }
+
+    @if (CurrentPage == EditPageType.Exercise)
+    {
+        <NavLink class="btn btn-primary my-2 my-sm-0 mx-3 disabled" href="/edit/exercise">Naloge</NavLink>
+    }
+    else
+    {
+        <NavLink class="btn btn-primary my-2 my-sm-0 mx-3" href="/edit/exercise">Naloge</NavLink>
+    }
+
+    @if (CurrentPage == EditPageType.GameResult)
+    {
+        <NavLink class="btn btn-primary my-2 my-sm-0 mx-3 disabled" href="/edit/gameresult">Rezultati nalog</NavLink>
+    }
+    else
+    {
+        <NavLink class="btn btn-primary my-2 my-sm-0 mx-3" href="/edit/gameresult">Rezultati nalog</NavLink>
+    }
+</div>

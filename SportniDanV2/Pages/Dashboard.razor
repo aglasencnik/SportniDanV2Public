@@ -1,0 +1,15 @@
+﻿@inherits DashboardBase
+@page "/dashboard/"
+
+<PageTitle>Nadzorna Plošča - Športni Dan 2022 Oktober</PageTitle>
+
+<div class="text-center d-grid gap-2">
+    @if (claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value == UserType.Admin.ToString())
+    {
+        <NavLink class="btn btn-lg btn-primary my-4" href="/edit/"><p class="custom-text">Urejanje podatkov športnega dneva</p></NavLink>
+        <br />
+    }
+    <NavLink class="btn btn-lg btn-primary my-4" href="/exercises"><p class="custom-text">Ogled Rezultatov</p></NavLink>
+    <br />
+    <NavLink class="btn btn-lg btn-primary my-4" href="/insertresults"><p class="custom-text">Vnos Rezultatov</p></NavLink>
+</div>

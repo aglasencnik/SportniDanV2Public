@@ -1,0 +1,19 @@
+﻿<CascadingAuthenticationState>
+    <CascadingBlazoredModal Position="ModalPosition.Middle">
+        <Router AppAssembly="@typeof(App).Assembly">
+            <Found Context="routeData">
+                <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+                <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+            </Found>
+            <NotFound>
+                <PageTitle>Stran ni najdena!</PageTitle>
+                <LayoutView Layout="@typeof(MainLayout)">
+                    <div class="imgbox">
+                        <h1 class="text-center text-danger">Žal iskana stran ni bila najdena!</h1>
+                        <img class="center-fit" src="img/page-not-found.jpg" alt="Stran ni bila najdena slika" />
+                    </div>
+                </LayoutView>
+            </NotFound>
+        </Router>
+    </CascadingBlazoredModal>
+</CascadingAuthenticationState>

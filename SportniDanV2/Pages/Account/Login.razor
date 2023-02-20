@@ -1,0 +1,32 @@
+﻿@inherits LoginBase
+@page "/account/login"
+
+<PageTitle>Prijava - Športni Dan 2022 Oktober</PageTitle>
+
+<AuthorizeView>
+    <NotAuthorized>
+        <div class="d-flex justify-content-center login-form border">
+            <EditForm Model="@loginModel" OnValidSubmit="@TryLogin" Context="LoginForm">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+
+                <div class="form-group">
+                    <label class="login-label">Uporabniško ime:</label>
+                    <div class="mt-2">
+                        <InputText @bind-Value="loginModel.Username" class="form-control input-border"></InputText>
+                    </div>
+                </div>
+                <div class="form-group mt-4">
+                    <label class="login-label">Geslo:</label>
+                    <div class="mt-2">
+                        <InputText type="password" @bind-Value="loginModel.Password" class="form-control input-border"></InputText>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary">Potrdi</button>
+                </div>
+                <p class="text-danger error-message mt-4">@errorMessage</p>
+            </EditForm>
+        </div>
+    </NotAuthorized>
+</AuthorizeView>

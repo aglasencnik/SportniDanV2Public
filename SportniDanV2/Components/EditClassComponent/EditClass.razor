@@ -1,0 +1,25 @@
+﻿@inherits EditClassBase
+
+<div class="modal-class">
+    <EditForm Model="inputModel" OnValidSubmit="@FormSubmit" Context="EditForm">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="form-group">
+            <label class="input-label">ID Razreda:</label>
+            <div class="mt-2">
+                <InputNumber @bind-Value="inputModel.Id" class="form-control input-border" disabled="true"></InputNumber>
+            </div>
+        </div>
+        <div class="form-group mt-4">
+            <label class="input-label">Ime razreda:</label>
+            <div class="mt-2">
+                <InputText @bind-Value="inputModel.Name" class="form-control input-border" disabled="@((EditType == Enums.EditType.Delete) ? true : false)"></InputText>
+            </div>
+        </div>
+        <div class="mt-4">
+            <button type="submit" class="btn btn-primary">Shrani</button>
+        </div>
+        <p class="text-danger error-message mt-4">@errorMessage</p>
+    </EditForm>
+</div>

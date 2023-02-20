@@ -1,0 +1,23 @@
+﻿@inherits ClassEditBase
+@page "/edit/class"
+
+<PageTitle>Urejanje Razredov - Športni Dan 2022 Oktober</PageTitle>
+
+<EditNavigation CurrentPage=@EditPageType.Class />
+
+<h1 class="text-center my-5">Urejanje Razredov</h1>
+
+<div class="col-lg-12 control-section">
+    <div class="content-wrapper">
+        <div class="row">
+            <SfGrid @ref="Grid" DataSource="@Classes" Toolbar="ToolbarItems" AllowPaging="true" AllowSorting="true" AllowFiltering="true">
+                <GridPageSettings PageSize="10"></GridPageSettings>
+                <GridEvents TValue="ClassModel" OnToolbarClick="ToolbarClickHandler"></GridEvents>
+                <GridColumns>
+                    <GridColumn Field=@nameof(ClassModel.Id) HeaderText="ID razreda" IsPrimaryKey="true" TextAlign="TextAlign.Center"></GridColumn>
+                    <GridColumn Field=@nameof(ClassModel.Name) HeaderText="Ime razreda" TextAlign="TextAlign.Center"></GridColumn>
+                </GridColumns>
+            </SfGrid>
+        </div>
+    </div>
+</div>

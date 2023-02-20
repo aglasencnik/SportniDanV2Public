@@ -1,0 +1,63 @@
+﻿@inherits InsertResultsBase
+@page "/insertresults/{ExerciseId:int}"
+
+<PageTitle>@($"Vpis {Exercise.ExerciseNumber}. Naloge")</PageTitle>
+
+    <div class="row">
+        <h1 class="text-center">@($"{Exercise.ExerciseNumber}. NALOGA: {Exercise.Title}")</h1>
+    <div class="col-md-4">
+        <EditForm Model="inputModel" OnValidSubmit="@FormSubmit" Context="EditForm">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="form-group mt-4">
+                <label class="input-label">Razred:</label>
+                <div class="wrapper mt-2">
+                    <InputSelect @bind-Value="inputModel.ClassId" class="form-select input-border" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
+                        @foreach (var item in Classes)
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    </InputSelect>
+                </div>
+            </div>
+
+            @if (Exercise.ExerciseType == ExerciseType.Time)
+            {
+                <p class="mt-4">Čas zapišite tako (primer: 43,3)</p>
+            }
+            else
+            {
+                <p class="mt-4">Tudi če je rezultat 0, to vseeno vpišite.</p>
+            }
+
+            @if (Exercise.NumberOfPlayers > 1)
+            {
+                @foreach (var i in Enumerable.Range(0, Exercise.NumberOfPlayers))
+                {
+                    var ii = i;
+                    int num = i + 1;
+
+                    <div class="form-group mt-4">
+                        <label class="input-label">@($"Dijak {num}:")</label>
+                        <div class="wrapper mt-2">
+                            <input type="number" value="@PlayerInputsList[ii]" @oninput="(e) => resum(ii, e)" step=".1" min="0" class="form-control input-border" placeholder="0,0" required />
+                        </div>
+                    </div>
+                }
+            }
+
+            <div class="form-group mt-4">
+                <label class="input-label">Rezultat:</label>
+                <div class="wrapper mt-2">
+                    <InputNumber @bind-Value=inputModel.Result @bind-Value:format="F2" step=".1" min="0" placeholder="0,0" class="form-control input-border" />
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <button type="submit" class="btn btn-primary">Shrani</button>
+            </div>
+            <p class="text-danger error-message mt-4">@errorMessage</p>
+        </EditForm>
+    </div>
+</div>

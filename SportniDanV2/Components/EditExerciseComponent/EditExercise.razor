@@ -1,0 +1,80 @@
+﻿@inherits EditExerciseBase
+
+<div class="modal-class">
+    <EditForm Model="inputModel" OnValidSubmit="@FormSubmit" Context="EditForm">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="form-group">
+            <label class="input-label">ID Naloge:</label>
+            <div class="mt-2">
+                <InputNumber @bind-Value="inputModel.Id" class="form-control input-border" disabled="true"></InputNumber>
+            </div>
+        </div>
+        <div class="form-group mt-4">
+            <label class="input-label">Številka naloge:</label>
+            <div class="mt-2">
+                <InputNumber @bind-Value="inputModel.ExerciseNumber" class="form-control input-border" disabled="@((EditType == Enums.EditType.Delete) ? true : false)"></InputNumber>
+            </div>
+        </div>
+        <div class="form-group mt-4">
+            <label class="input-label">Nalov naloge:</label>
+            <div class="mt-2">
+                <InputText @bind-Value="inputModel.Title" class="form-control input-border" disabled="@((EditType == Enums.EditType.Delete) ? true : false)"></InputText>
+            </div>
+        </div>
+        <div class="form-group mt-4">
+            <label class="input-label">Lokacija naloge:</label>
+            <div class="mt-2">
+                <InputText @bind-Value="inputModel.Location" class="form-control input-border" disabled="@((EditType == Enums.EditType.Delete) ? true : false)"></InputText>
+            </div>
+        </div>
+        <div class="form-group mt-4">
+            <label class="input-label">Rekviziti:</label>
+            <div class="mt-2">
+                <InputText @bind-Value="inputModel.Props" class="form-control input-border" disabled="@((EditType == Enums.EditType.Delete) ? true : false)"></InputText>
+            </div>
+        </div>
+        <div class="form-group mt-4">
+            <label class="input-label">Tip naloge:</label>
+            <div class="mt-2">
+                <InputSelect @bind-Value="inputModel.ExerciseType" class="form-select input-border" disabled="@((EditType == Enums.EditType.Delete) ? true : false)">
+                    @foreach (var item in Enum.GetValues(typeof(ExerciseType)))
+                    {
+                        <option value="@item">@item</option>
+                    }
+                </InputSelect>
+            </div>
+        </div>
+        <div class="form-group mt-4">
+            <label class="input-label">Tip razvrščanja:</label>
+            <div class="mt-2">
+                <InputSelect @bind-Value="inputModel.OrderType" class="form-select input-border" disabled="@((EditType == Enums.EditType.Delete) ? true : false)">
+                    @foreach (var item in Enum.GetValues(typeof(OrderType)))
+                    {
+                        <option value="@item">@item</option>
+                    }
+                </InputSelect>
+            </div>
+        </div>
+        <div class="form-group mt-4">
+            <label class="input-label">Število igralcev:</label>
+            <div class="mt-2">
+                <InputNumber @bind-Value="inputModel.NumberOfPlayers" class="form-control input-border" disabled="@((EditType == Enums.EditType.Delete) ? true : false)"></InputNumber>
+            </div>
+        </div>
+        <div class="form-group mt-4">
+            <label class="input-label">Pravila (uporabi pike za označevanje):</label>
+            <div class="mt-2">
+                <SfRichTextEditor ShowCharCount="true" AutoSaveOnIdle="true" @bind-Value="inputModel.Rules" SaveInterval="1">
+                    <RichTextEditorToolbarSettings Items="@Tools" />
+                    <RichTextEditorQuickToolbarSettings Table="@TableQuickToolbarItems" />
+                </SfRichTextEditor>
+            </div>
+        </div>
+        <div class="mt-4">
+            <button type="submit" class="btn btn-primary">Shrani</button>
+        </div>
+        <p class="text-danger error-message mt-4">@errorMessage</p>
+    </EditForm>
+</div>

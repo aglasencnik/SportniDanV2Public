@@ -1,0 +1,17 @@
+﻿@inherits ExercisesBase
+@page "/exercises"
+@using SportniDanV2.Components.ExercisePreviewComponent
+
+<PageTitle>Naloge</PageTitle>
+
+<h1 class="text-center display-4">Naloge</h1>
+
+<div class="m-2">
+    @if (exercises != null && exercises.Count() != 0)
+    {
+        foreach (var exercise in exercises)
+        {
+            <ExercisePreview Exercise=@exercise ExercisePreviewType=@ExercisePreviewType.View />
+        }
+    }
+</div>

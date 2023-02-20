@@ -1,0 +1,20 @@
+﻿@inherits HomePageEditBase
+@page "/edit/homepage"
+
+<PageTitle>Urejanje Domače Strani - Športni Dan 2022 Oktober</PageTitle>
+
+<EditNavigation CurrentPage=@EditPageType.HomePage />
+
+<h1 class="text-center my-5">Urejanje Domače Strani</h1>
+
+<div class="control-section">
+    <div class="control-wrapper">
+        <div class="">
+            <SfRichTextEditor ShowCharCount="true" AutoSaveOnIdle="true" @bind-Value="RTEValue" SaveInterval="1">
+                <RichTextEditorToolbarSettings Items="@Tools" />
+                <RichTextEditorQuickToolbarSettings Table="@TableQuickToolbarItems" />
+            </SfRichTextEditor>
+        </div>
+        <button class="btn btn-primary mt-4" @onclick="SaveHomePage">Shrani spremembe</button>
+    </div>
+</div>

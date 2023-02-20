@@ -1,0 +1,71 @@
+﻿@inherits LayoutComponentBase
+@using Blazored.Toast.Configuration
+
+<PageTitle>SportniDanV2</PageTitle>
+
+<BlazoredToasts Position="ToastPosition.BottomRight"
+                Timeout="10"
+                ShowProgressBar="true" />
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid navbar-padding">
+        <a class="navbar-brand" href="/">Športni dan 2022 oktober</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Domov</a>
+                </li>
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="/exercises">Naloge</NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="/exercisescores">Rezultati po nalogah</NavLink>
+                </li>
+            </ul>
+            <AuthorizeView>
+                <Authorized>
+                    <div class="username-text-div">
+                        <p>Pozdravljeni, @(context.User.Identity.Name)!</p>
+                    </div>
+                    <div class="control-panel-padding">
+                        <NavLink class="btn btn-secondary btn-login" href="/dashboard/">Nadzorna plošča</NavLink>
+                    </div>
+                    <div>
+                        <NavLink class="btn btn-secondary my-2 my-sm-0 btn-login" href="/account/logout">Odjava</NavLink>
+                    </div>
+                </Authorized>
+                <NotAuthorized>
+                    <NavLink class="btn btn-secondary my-2 my-sm-0 btn-login" href="/account/login">Prijava</NavLink>
+                </NotAuthorized>
+            </AuthorizeView>
+        </div>
+    </div>
+</nav>
+
+<div class="page">
+    <main>
+        <article class="container content px-4">
+            @Body
+        </article>
+    </main>
+</div>
+
+<footer class="footer py-3 mt-4 navbar-dark bg-dark">
+    <ul class="nav justify-content-center pb-3 mb-3">
+        <li class="nav-item"><NavLink href="" class="nav-link px-2 text-muted">Domov</NavLink></li>
+        <li class="nav-item"><NavLink href="/exercises" class="nav-link px-2 text-muted">Naloge</NavLink></li>
+        <li class="nav-item"><NavLink href="/exercisescores" class="nav-link px-2 text-muted">Rezultati po nalogah</NavLink></li>
+        <AuthorizeView>
+            <Authorized>
+                <li class="nav-item"><NavLink href="/account/logout" class="nav-link px-2 text-muted">Odjava</NavLink></li>
+            </Authorized>
+            <NotAuthorized>
+                <li class="nav-item"><NavLink href="/account/login" class="nav-link px-2 text-muted">Prijava</NavLink></li>
+            </NotAuthorized>
+        </AuthorizeView>
+    </ul>
+    <p class="text-center text-muted">© @DateTime.Today.ToString("yyyy"), Amadej Glasenčnik</p>
+</footer>
